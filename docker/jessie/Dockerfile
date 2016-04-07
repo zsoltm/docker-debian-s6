@@ -4,6 +4,7 @@ MAINTAINER Bertrand Bonnefoy-Claudet <bertrandbc@gmail.com>
 ADD rootfs /
 
 # Configure apt
+
 RUN \
     # Prepare system
     apt-wrap apt-get update \
@@ -18,9 +19,11 @@ RUN \
     && apt-wrap apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV LANG en_US.utf8
+ENV LANG=en_US.utf8 S6_OVL_VER=1.17.2.0
 
 # Add s6 overlay (https://github.com/just-containers/s6-overlay)
-ADD https://github.com/just-containers/s6-overlay/releases/download/v1.14.0.0/s6-overlay-amd64.tar.gz /tmp/s6-overlay.tar.gz
+
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVL_VER}/s6-overlay-amd64.tar.gz /tmp/s6-overlay.tar.gz
 RUN tar xvfz /tmp/s6-overlay.tar.gz -C /
 ENTRYPOINT ["/init"]
+

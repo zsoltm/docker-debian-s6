@@ -5,4 +5,4 @@ IMAGE_TARGETS = wheezy jessie
 all: $(IMAGE_TARGETS)
 
 $(IMAGE_TARGETS):
-	docker build -t "bbc2/debian-s6:$@" "docker/$@"
+	docker build -t "zsoltm/debian-s6:$@" "docker/$@"
